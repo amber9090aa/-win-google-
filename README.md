@@ -25,13 +25,5 @@
 
 ---
 
-## 重要提示
-
-- `update-links.ps1` 中的基础路径（示例 `D:\xm\USERDATA`）可按需修改为你想存放Chrome数据的目录。  
-- 确保执行环境允许运行PowerShell脚本（`ExecutionPolicy` 被允许或通过 `shuxing.bat` 中参数覆盖）。  
-- 脚本会直接重命名 `.lnk` 文件，使用前请备份或确认目录无多余快捷方式避免误操作。  
-- 如果需要保留快捷方式原参数或做自定义修改，需要调整 `update-links.ps1` 脚本逻辑。
-
----
 
 
