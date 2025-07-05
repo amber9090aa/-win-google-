@@ -1,29 +1,45 @@
-批量修改Chrome快捷方式名字及设置用户数据目录操作说明
-文件说明
-文件名	作用说明
-rename.bat	批量获取当前目录所有 .lnk 快捷方式，按名称排序重命名为4位数字序号（0001.lnk、0002.lnk…），并调用 PowerShell 脚本批量修改参数。
-update-links.ps1	PowerShell 脚本，遍历当前目录所有 .lnk 文件，根据快捷方式名，在指定目录下创建对应文件夹，并将快捷方式参数设置为 --user-data-dir=对应文件夹。
-shuxing.bat	用于调用 update-links.ps1 的辅助批处理脚本，设置执行策略并运行PowerShell脚本。
+# 批量修改Chrome快捷方式名字及设置用户数据目录操作说明
 
-使用步骤
-准备工作
-把 rename.bat、update-links.ps1、shuxing.bat 和需要操作的 .lnk 文件放在同一个文件夹。
+## 文件说明
 
-执行快捷方式重命名并参数修改
-双击运行 rename.bat，脚本会自动：
+| 文件名             | 作用说明                                                                                   |
+|--------------------|--------------------------------------------------------------------------------------------|
+| **rename.bat**     | 批量获取当前目录所有 `.lnk` 快捷方式，按名称排序重命名为4位数字序号（0001.lnk、0002.lnk…），并调用 PowerShell 脚本批量修改参数。 |
+| **update-links.ps1** | PowerShell 脚本，遍历当前目录所有 `.lnk` 文件，根据快捷方式名，在指定目录下创建对应文件夹，并将快捷方式参数设置为 `--user-data-dir=对应文件夹`。        |
+| **shuxing.bat**    | 用于调用 `update-links.ps1` 的辅助批处理脚本，设置执行策略并运行PowerShell脚本。                            |
 
-按名称排序给 .lnk 文件重命名为四位数字序号。
+---
 
-调用 shuxing.bat，再由它调用 update-links.ps1 修改每个快捷方式的参数。
+## 使用步骤
 
-效果
-每个快捷方式会带有独立的 --user-data-dir 参数，参数指向 update-links.ps1 中指定的基础路径下对应快捷方式名的目录，方便多实例隔离数据。
+1. **准备工作**  
+   将 `rename.bat`、`update-links.ps1`、`shuxing.bat` 和需要操作的 `.lnk` 文件放在同一个文件夹。
 
-重要提示
-update-links.ps1 中的基础路径（示例 D:\xm\USERDATA）可按需修改为你想存放Chrome数据的目录。
+2. **执行快捷方式重命名并参数修改**  
+   双击运行 `rename.bat`，脚本会自动：  
+   - 按名称排序给 `.lnk` 文件重命名为四位数字序号。  
+   - 调用 `shuxing.bat`，由它调用 `update-links.ps1` 修改每个快捷方式的参数。  
 
-确保执行环境允许运行PowerShell脚本（ExecutionPolicy 被允许或通过 shuxing.bat 中参数覆盖）。
+3. **执行结果**  
+   每个快捷方式会带有独立的 `--user-data-dir` 参数，参数指向 `update-links.ps1` 中指定的基础路径下对应快捷方式名的目录，方便多实例隔离数据。
 
-脚本会直接重命名 .lnk 文件，使用前请备份或确认目录无多余快捷方式避免误操作。
+---
 
-如果需要保留快捷方式原参数或者其他自定义需求，需对 update-links.ps1 进行适当调整。
+## 重要提示
+
+- `update-links.ps1` 中的基础路径（示例 `D:\xm\USERDATA`）可按需修改为你想存放Chrome数据的目录。  
+- 确保执行环境允许运行PowerShell脚本（`ExecutionPolicy` 被允许或通过 `shuxing.bat` 中参数覆盖）。  
+- 脚本会直接重命名 `.lnk` 文件，使用前请备份或确认目录无多余快捷方式避免误操作。  
+- 如果需要保留快捷方式原参数或做自定义修改，需要调整 `update-links.ps1` 脚本逻辑。
+
+---
+
+## 其他说明
+
+- 你可以根据需要自行修改 `update-links.ps1` 里的 `$baseDir` 路径。  
+- 第一次使用时，PowerShell 可能提示权限问题，请以管理员身份运行或调整执行策略。  
+- 此方案适合需要多账号、多Chrome环境隔离的场景。
+
+---
+
+如果需要，我可以帮你写一个集成一键执行脚本，或者帮你根据需求调整脚本内容。
